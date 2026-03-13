@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Karthik Fresh Foods</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#fff8f0;
+}
+
+header{
+background:#8B4513;
+color:white;
+padding:15px;
+text-align:center;
+position:relative;
+}
+
+.logo{
+width:120px;
+display:block;
+margin:auto;
+}
+
+.phone{
+position:absolute;
+right:20px;
+top:10px;
+font-weight:bold;
+}
+
+.hero{
+background:#f4d6a0;
+padding:30px;
+text-align:center;
+}
+
+.products{
+padding:30px;
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:white;
+margin-bottom:20px;
+padding:15px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
+display:flex;
+gap:15px;
+align-items:center;
+}
+
+.card img{
+width:120px;
+height:90px;
+border-radius:8px;
+object-fit:cover;
+}
+
+.price{
+color:#8B4513;
+font-weight:bold;
+}
+
+button{
+background:#8B4513;
+color:white;
+padding:8px 12px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.cart{
+background:#ffe9cc;
+padding:20px;
+margin:20px;
+border-radius:10px;
+text-align:center;
+}
+
+.total{
+font-size:20px;
+font-weight:bold;
+color:#8B4513;
+}
+
+.orderlist{
+background:#f4f4f4;
+padding:20px;
+margin:20px;
+border-radius:10px;
+}
+
+</style>
+
+<script>
+
+let cart=[]
+let total=0
+
+function addToCart(product,price){
+
+let qty=prompt("Enter packets")
+
+if(!qty) return
+
+let cost=price*qty
+
+cart.push(product+" x "+qty+" = ₹"+cost)
+
+total+=cost
+
+updateCart()
+
+}
+
+function updateCart(){
+
+let cartBox=document.getElementById("cartItems")
+
+cartBox.innerHTML=""
+
+cart.forEach(item=>{
+cartBox.innerHTML+=item+"<br>"
+})
+
+document.getElementById("total").innerHTML="Total: ₹"+total
+
+}
+
+function clearCart(){
+
+cart=[]
+total=0
+
+updateCart()
+
+}
+
+function placeOrder(){
+
+if(cart.length==0){
+alert("Cart empty")
+return
+}
+
+let order=cart.join("<br>")+"<br>Total: ₹"+total
+
+let orders=JSON.parse(localStorage.getItem("orders")||"[]")
+
+orders.push(order)
+
+localStorage.setItem("orders",JSON.stringify(orders))
+
+showOrders()
+
+}
+
+function showOrders(){
+
+let orders=JSON.parse(localStorage.getItem("orders")||"[]")
+
+let list=document.getElementById("orders")
+
+list.innerHTML=""
+
+orders.forEach(o=>{
+list.innerHTML+=o+"<hr>"
+})
+
+}
+
+function sendWhatsApp(number){
+
+let text=cart.join("%0A")+"%0ATotal: ₹"+total
+
+window.open("https://wa.me/91"+number+"?text="+text)
+
+}
+
+window.onload=showOrders
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<img src="images/kff_logo.jpg" class="logo">
+
+<h2>Karthik Fresh Foods</h2>
+
+<div class="phone">
+📞 9100240091<br>
+📞 9390206546
+</div>
+
+</header>
+
+<section class="hero">
+
+<h3>Fresh Homemade Rotis</h3>
+
+<p>Each Packet Contains <b>10 Pieces</b></p>
+
+<p><b>Proprietor:</b> V Ravindra Nath Tagur</p>
+
+<p><b>Proprietor Mobile:</b> 📞 6281218153</p>
+
+</section>
+
+<section class="products">
+
+<h2>Our Menu</h2>
+
+<div class="card">
+<img src="images/poori.jpg">
+<div>
+<h3>Poori</h3>
+<div class="price">₹40 / Packet</div>
+<button onclick="addToCart('Poori',40)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="images/chapathi.jpg">
+<div>
+<h3>Chapathi</h3>
+<div class="price">₹50 / Packet</div>
+<button onclick="addToCart('Chapathi',50)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="images/ragi.jpg">
+<div>
+<h3>Ragi Roti</h3>
+<div class="price">₹40 / Packet</div>
+<button onclick="addToCart('Ragi Roti',40)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="images/jonna.jpg">
+<div>
+<h3>Jonna Roti</h3>
+<div class="price">₹40 / Packet</div>
+<button onclick="addToCart('Jonna Roti',40)">Add</button>
+</div>
+</div>
+
+<div class="card">
+<img src="images/parota.jpg">
+<div>
+<h3>Paratha</h3>
+<div class="price">₹110 / Packet</div>
+<button onclick="addToCart('Paratha',110)">Add</button>
+</div>
+</div>
+
+</section>
+
+<section class="cart">
+
+<h2>Cart Items</h2>
+
+<div id="cartItems"></div>
+
+<div class="total" id="total">Total: ₹0</div>
+
+<br>
+
+<button onclick="clearCart()">Clear Orders</button>
+
+<button onclick="placeOrder()">Place Order</button>
+
+<br><br>
+
+<button onclick="sendWhatsApp('9100240091')">WhatsApp 9100240091</button>
+
+<button onclick="sendWhatsApp('9390206546')">WhatsApp 9390206546</button>
+
+</section>
+
+<section class="orderlist">
+
+<h2>My Orders</h2>
+
+<div id="orders"></div>
+
+</section>
+
+</body>
+</html>
