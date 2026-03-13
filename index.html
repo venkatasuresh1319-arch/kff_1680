@@ -90,6 +90,21 @@ font-weight:bold;
 color:#8B4513;
 }
 
+.form{
+background:#f4f4f4;
+padding:20px;
+margin:20px;
+border-radius:10px;
+}
+
+input,textarea{
+width:90%;
+padding:8px;
+margin:5px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
 .orderlist{
 background:#f4f4f4;
 padding:20px;
@@ -143,48 +158,24 @@ updateCart()
 
 }
 
-function placeOrder(){
-
-if(cart.length==0){
-alert("Cart empty")
-return
-}
-
-let order=cart.join("<br>")+"<br>Total: ₹"+total
-
-let orders=JSON.parse(localStorage.getItem("orders")||"[]")
-
-orders.push(order)
-
-localStorage.setItem("orders",JSON.stringify(orders))
-
-showOrders()
-
-}
-
-function showOrders(){
-
-let orders=JSON.parse(localStorage.getItem("orders")||"[]")
-
-let list=document.getElementById("orders")
-
-list.innerHTML=""
-
-orders.forEach(o=>{
-list.innerHTML+=o+"<hr>"
-})
-
-}
-
 function sendWhatsApp(number){
 
-let text=cart.join("%0A")+"%0ATotal: ₹"+total
+let name=document.getElementById("name").value
+let mobile=document.getElementById("mobile").value
+let village=document.getElementById("village").value
 
-window.open("https://wa.me/91"+number+"?text="+text)
+let order=cart.join("%0A")
+
+let message="Order from Karthik Fresh Foods%0A%0A"
++"Customer: "+name+"%0A"
++"Mobile: "+mobile+"%0A"
++"Village/Address: "+village+"%0A%0A"
++order+"%0A"
++"Total: ₹"+total
+
+window.open("https://wa.me/91"+number+"?text="+message)
 
 }
-
-window.onload=showOrders
 
 </script>
 
@@ -268,6 +259,18 @@ window.onload=showOrders
 
 </section>
 
+<section class="form">
+
+<h2>Customer Details</h2>
+
+<input type="text" id="name" placeholder="Customer Name">
+
+<input type="text" id="mobile" placeholder="Mobile Number">
+
+<textarea id="village" placeholder="Village / Delivery Address"></textarea>
+
+</section>
+
 <section class="cart">
 
 <h2>Cart Items</h2>
@@ -280,13 +283,11 @@ window.onload=showOrders
 
 <button onclick="clearCart()">Clear Orders</button>
 
-<button onclick="placeOrder()">Place Order</button>
-
 <br><br>
 
-<button onclick="sendWhatsApp('9100240091')">WhatsApp 9100240091</button>
+<button onclick="sendWhatsApp('9100240091')">Order WhatsApp 9100240091</button>
 
-<button onclick="sendWhatsApp('9390206546')">WhatsApp 9390206546</button>
+<button onclick="sendWhatsApp('9390206546')">Order WhatsApp 9390206546</button>
 
 </section>
 
