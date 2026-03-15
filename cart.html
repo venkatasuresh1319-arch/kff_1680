@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>My Cart</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body onload="loadCart()">
+
+<h1 style="text-align:center">🛒 My Cart</h1>
+
+<div class="cartContainer">
+
+<div id="cartItems"></div>
+
+<h2>Total : ₹<span id="total"></span></h2>
+
+<div class="customerForm">
+
+<input id="name" placeholder="Customer Name">
+
+<input id="mobile" placeholder="Mobile Number">
+
+<input id="village" placeholder="Village / Address">
+
+</div>
+
+<button class="orderBtn" onclick="placeOrder()">
+Place Order
+</button>
+
+<button class="clearBtn" onclick="clearCart()">
+Clear Order
+</button>
+
+</div>
+
+<a href="index.html">
+
+<button class="backBtn">
+⬅ Back
+</button>
+
+</a>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
