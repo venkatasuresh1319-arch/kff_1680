@@ -1,303 +1,247 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Karthik Fresh Foods</title>
 
-<style>
+<title>KFF Foods | Karthik Fresh Foods Ready to Cook Products</title>
 
-body{
-font-family:Arial;
-margin:0;
-background:#fff8f0;
-}
+<meta charset="UTF-8">
 
-header{
-background:#8B4513;
-color:white;
-padding:15px;
-text-align:center;
-position:relative;
-}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.logo{
-width:120px;
-display:block;
-margin:auto;
-}
+<meta name="description"
+content="KFF Foods manufacturing ready to cook chapathi, poori, ragi roti, jonna roti and paratha packets. Order fresh homemade food products online.">
 
-.phone{
-position:absolute;
-right:20px;
-top:10px;
-font-weight:bold;
-}
+<meta name="keywords"
+content="KFF Foods, Karthik Fresh Foods, chapathi packets, poori packets, ragi roti, jonna roti, ready to cook foods">
 
-.hero{
-background:#f4d6a0;
-padding:30px;
-text-align:center;
-}
+<meta name="author" content="Karthik Fresh Foods">
 
-.products{
-padding:30px;
-max-width:700px;
-margin:auto;
-}
+<meta name="robots" content="index, follow">
 
-.card{
-background:white;
-margin-bottom:20px;
-padding:15px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.2);
-display:flex;
-gap:15px;
-align-items:center;
-}
+<link rel="stylesheet" href="style.css">
 
-.card img{
-width:120px;
-height:90px;
-border-radius:8px;
-object-fit:cover;
-}
-
-.price{
-color:#8B4513;
-font-weight:bold;
-}
-
-button{
-background:#8B4513;
-color:white;
-padding:8px 12px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-
-.cart{
-background:#ffe9cc;
-padding:20px;
-margin:20px;
-border-radius:10px;
-text-align:center;
-}
-
-.total{
-font-size:20px;
-font-weight:bold;
-color:#8B4513;
-}
-
-.form{
-background:#f4f4f4;
-padding:20px;
-margin:20px;
-border-radius:10px;
-}
-
-input,textarea{
-width:90%;
-padding:8px;
-margin:5px;
-border-radius:5px;
-border:1px solid #ccc;
-}
-
-.orderlist{
-background:#f4f4f4;
-padding:20px;
-margin:20px;
-border-radius:10px;
-}
-
-</style>
-
-<script>
-
-let cart=[]
-let total=0
-
-function addToCart(product,price){
-
-let qty=prompt("Enter packets")
-
-if(!qty) return
-
-let cost=price*qty
-
-cart.push(product+" x "+qty+" = ₹"+cost)
-
-total+=cost
-
-updateCart()
-
-}
-
-function updateCart(){
-
-let cartBox=document.getElementById("cartItems")
-
-cartBox.innerHTML=""
-
-cart.forEach(item=>{
-cartBox.innerHTML+=item+"<br>"
-})
-
-document.getElementById("total").innerHTML="Total: ₹"+total
-
-}
-
-function clearCart(){
-
-cart=[]
-total=0
-
-updateCart()
-
-}
-
-function sendWhatsApp(number){
-
-let name=document.getElementById("name").value
-let mobile=document.getElementById("mobile").value
-let village=document.getElementById("village").value
-
-let order=cart.join("%0A")
-
-let message="Order from Karthik Fresh Foods%0A%0A"
-+"Customer: "+name+"%0A"
-+"Mobile: "+mobile+"%0A"
-+"Village/Address: "+village+"%0A%0A"
-+order+"%0A"
-+"Total: ₹"+total
-
-window.open("https://wa.me/91"+number+"?text="+message)
-
-}
-
-</script>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
-
 <body>
 
-<header>
+<header class="header">
+
+<div class="header-center">
 
 <img src="images/kff_logo.jpg" class="logo">
 
-<h2>Karthik Fresh Foods</h2>
+<h1>Karthik Fresh Foods</h1>
 
-<div class="phone">
-📞 9100240091<br>
-📞 9390206546
+<p>Proprietor : V Ravindra Nath Tagur</p>
+<p>Proprietor Number & for bulk orders : 6281218153</p>
+<p>For Orders : 9390206546</p>
+<p>Customer Care : 9100240091</p>
+
+</div>
+
+<div class="header-right">
+
+<a href="orders.html">
+<button class="btn">
+<i class="fa-solid fa-box"></i> Orders
+</button>
+</a>
+
+<a href="cart.html">
+<button class="btn">
+<i class="fa-solid fa-cart-shopping"></i> Cart
+</button>
+</a>
+
 </div>
 
 </header>
 
-<section class="hero">
+<h2 class="section-title">Ready To Cook Packets</h2>
 
-<h3>Fresh Homemade Rotis</h3>
+<div class="products">
 
-<p>Each Packet Contains <b>10 Pieces</b></p>
-
-<p><b>Proprietor:</b> V Ravindra Nath Tagur</p>
-
-<p><b>Proprietor Mobile:</b> 📞 6281218153</p>
-
-</section>
-
-<section class="products">
-
-<h2>Our Menu</h2>
+<!-- Poori -->
 
 <div class="card">
+
 <img src="images/poori.jpg">
-<div>
+
+<div class="info">
+
 <h3>Poori</h3>
-<div class="price">₹40 / Packet</div>
-<button onclick="addToCart('Poori',40)">Add</button>
-</div>
+<p>Ready to cook packet containing 10 pieces.</p>
+<h4>₹40</h4>
+
 </div>
 
+<div class="cartControls">
+
+<div class="qtyBox">
+
+<button onclick="decreaseQty('poori')">−</button>
+<span id="poori-qty">1</span>
+<button onclick="increaseQty('poori')">+</button>
+
+</div>
+
+<button class="addBtn"
+onclick="addToCart('Poori',40,'poori')">
+
+ADD TO CART
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Chapathi -->
+
 <div class="card">
+
 <img src="images/chapathi.jpg">
-<div>
+
+<div class="info">
+
 <h3>Chapathi</h3>
-<div class="price">₹50 / Packet</div>
-<button onclick="addToCart('Chapathi',50)">Add</button>
-</div>
+<p>Ready to cook packet containing 10 pieces.</p>
+<h4>₹50</h4>
+
 </div>
 
+<div class="cartControls">
+
+<div class="qtyBox">
+
+<button onclick="decreaseQty('chapathi')">−</button>
+<span id="chapathi-qty">1</span>
+<button onclick="increaseQty('chapathi')">+</button>
+
+</div>
+
+<button class="addBtn"
+onclick="addToCart('Chapathi',50,'chapathi')">
+
+ADD TO CART
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Ragi -->
+
 <div class="card">
+
 <img src="images/ragi.jpg">
-<div>
+
+<div class="info">
+
 <h3>Ragi Roti</h3>
-<div class="price">₹40 / Packet</div>
-<button onclick="addToCart('Ragi Roti',40)">Add</button>
-</div>
+<p>Ready to cook packet containing 10 pieces.</p>
+<h4>₹50</h4>
+
 </div>
 
+<div class="cartControls">
+
+<div class="qtyBox">
+
+<button onclick="decreaseQty('ragi')">−</button>
+<span id="ragi-qty">1</span>
+<button onclick="increaseQty('ragi')">+</button>
+
+</div>
+
+<button class="addBtn"
+onclick="addToCart('Ragi Roti',50,'ragi')">
+
+ADD TO CART
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Jonna -->
+
 <div class="card">
+
 <img src="images/jonna.jpg">
-<div>
+
+<div class="info">
+
 <h3>Jonna Roti</h3>
-<div class="price">₹40 / Packet</div>
-<button onclick="addToCart('Jonna Roti',40)">Add</button>
+<p>Ready to cook packet containing 10 pieces.</p>
+<h4>₹50</h4>
+
 </div>
+
+<div class="cartControls">
+
+<div class="qtyBox">
+
+<button onclick="decreaseQty('jonna')">−</button>
+<span id="jonna-qty">1</span>
+<button onclick="increaseQty('jonna')">+</button>
+
 </div>
+
+<button class="addBtn"
+onclick="addToCart('Jonna Roti',50,'jonna')">
+
+ADD TO CART
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Paratha -->
 
 <div class="card">
+
 <img src="images/parota.jpg">
-<div>
+
+<div class="info">
+
 <h3>Paratha</h3>
-<div class="price">₹110 / Packet</div>
-<button onclick="addToCart('Paratha',110)">Add</button>
+<p>Ready to cook packet containing 10 pieces.</p>
+<h4>₹110</h4>
+
 </div>
+
+<div class="cartControls">
+
+<div class="qtyBox">
+
+<button onclick="decreaseQty('paratha')">−</button>
+<span id="paratha-qty">1</span>
+<button onclick="increaseQty('paratha')">+</button>
+
 </div>
 
-</section>
+<button class="addBtn"
+onclick="addToCart('Paratha',110,'paratha')">
 
-<section class="form">
+ADD TO CART
 
-<h2>Customer Details</h2>
+</button>
 
-<input type="text" id="name" placeholder="Customer Name">
+</div>
 
-<input type="text" id="mobile" placeholder="Mobile Number">
+</div>
 
-<textarea id="village" placeholder="Village / Delivery Address"></textarea>
+</div>
 
-</section>
-
-<section class="cart">
-
-<h2>Cart Items</h2>
-
-<div id="cartItems"></div>
-
-<div class="total" id="total">Total: ₹0</div>
-
-<br>
-
-<button onclick="clearCart()">Clear Orders</button>
-
-<br><br>
-
-<button onclick="sendWhatsApp('9100240091')">Order WhatsApp 9100240091</button>
-
-<button onclick="sendWhatsApp('9390206546')">Order WhatsApp 9390206546</button>
-
-</section>
-
-<section class="orderlist">
-
-<h2>My Orders</h2>
-
-<div id="orders"></div>
-
-</section>
+<script src="script.js"></script>
 
 </body>
 </html>
